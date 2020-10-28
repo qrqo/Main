@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
@@ -38,7 +37,6 @@ import { UserFacebookModel } from './models/user-facebook-model';
     AppRoutingModule,
     NgxSpinnerModule,
     BrowserAnimationsModule,
-    SweetAlert2Module,
 
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,

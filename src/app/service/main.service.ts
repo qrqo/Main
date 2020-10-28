@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgZone } from '@angular/core';
 import { NgxSpinnerService } from "ngx-spinner";
-import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import Swal from 'sweetalert2';
 
 @Injectable({
@@ -12,8 +11,7 @@ export class MainService {
   constructor(
     private router: Router,
     private ngZone:NgZone,
-    private spinner: NgxSpinnerService,
-    private sweetAlert: SweetAlert2Module
+    private spinner: NgxSpinnerService
   ) { }
 
   goToParam(path:string, param:any){
