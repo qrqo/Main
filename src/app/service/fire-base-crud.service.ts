@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 
 import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFirestore } from '@angular/fire/firestore';
+import * as firebase from 'firebase/app';
 
 @Injectable({
   providedIn: 'root'
@@ -8,11 +10,14 @@ import { AngularFireDatabase } from '@angular/fire/database';
 export class FireBaseCRUDService {
 
   constructor(
-    private db: AngularFireDatabase
+    private dbrt: AngularFireDatabase,
+    private dbfs: AngularFirestore
   ) { }
 
-  where(obj){
-    return this.db.object(obj); 
+  where_rt(obj){
+    return this.dbrt.object(obj); 
   }
+
+  public fs = firebase.firestore();
   
 }
