@@ -5,6 +5,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 //Service
 import { MainService } from '../service/main.service';
 import { FireBaseCRUDService } from '../service/fire-base-crud.service';
+import { promise } from 'protractor';
 
 @Injectable({
   providedIn: 'root'
@@ -17,13 +18,7 @@ export class AuthService {
   ){ }
 
   checkAuth(){
-    this.afAuth.authState.subscribe((auth=>{
-      if(!auth){
-        console.log("logouted");
-      }else{
-        return auth.uid;
-      }
-    }));
+    return this.afAuth;
   }
 
   logout(){
