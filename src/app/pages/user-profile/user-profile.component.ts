@@ -5,28 +5,22 @@ import { AuthService } from '../../service/auth.service';
 import { MainService } from '../../service/main.service';
 import { FireBaseCRUDService } from '../../service/fire-base-crud.service';
 
+import { Globals } from '../../models/globals';
+
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.scss'],
+  styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
-  public Username: string;
-
   constructor(
     private main: MainService,
     private auth: AuthService,
-    private db: FireBaseCRUDService
+    private db: FireBaseCRUDService,
+    public globals: Globals
   ) {
-    auth.checkAuth().authState.subscribe((d) => {
-      const cityRef = db.fs.collection('cities').doc(d.uid);
-      const doc = await cityRef.get();
-      if (!doc.exists) {
-        console.log('No such document!');
-      } else {
-        console.log('Document data:', doc.data());
-      }
-    });
+    //console.log(this.globals.user);
+    
   }
 
   ngOnInit() {

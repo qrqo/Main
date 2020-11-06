@@ -24,6 +24,8 @@ import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { UserFacebookModel } from './models/user-facebook-model';
 import { SettingProductComponent } from './pages/setting-product/setting-product.component';
 
+import { Globals } from './models/globals';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +49,8 @@ import { SettingProductComponent } from './pages/setting-product/setting-product
     AngularFireDatabaseModule
   ],
   providers: [
-    UserFacebookModel
+    UserFacebookModel,
+    Globals
   ],
   bootstrap: [AppComponent]
 })

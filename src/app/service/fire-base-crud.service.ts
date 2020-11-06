@@ -19,5 +19,10 @@ export class FireBaseCRUDService {
   }
 
   public fs = firebase.firestore();
+
+  now(){
+    return firebase.firestore.FieldValue.serverTimestamp();
+  }
+  
   
 }
