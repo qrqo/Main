@@ -27,11 +27,11 @@ export class AuthService {
     firebase
       .auth()
       .signOut()
-      .then(function () {
-        // Sign-out successful.
+      .then(() => {
+        this.main.goTo("/login");
       })
-      .catch(function (error) {
-        // An error happened.
+      .catch((error) => {        
+        this.main.swalError(error.message);
       });
   }
 
@@ -79,10 +79,14 @@ export class AuthService {
 
             user.update(userFacebook);
             this.checkAuth().authState.subscribe((d) => {
+              if (!d) {
+                this.main.goTo("/login");
+                return;
+              }
               const cityRef = this.db.fs.collection('users').doc(d.uid);
-              cityRef.onSnapshot((querySnapshot) => {
-                const d = querySnapshot.data();      
-                this.globals.user = d;
+
+              cityRef.get().then(user =>{
+                this.globals.user = user.data()
               });
             });
           });

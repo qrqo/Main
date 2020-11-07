@@ -41,7 +41,17 @@ export class MainService {
     return Swal.mixin({
       allowOutsideClick : false
     });
-  }  
+  }
+  
+  swalError(errorMessage){
+    this.swal().fire({
+      title: 'Error!',
+      text: errorMessage,
+      icon: 'error',
+      confirmButtonText: 'ตกลก',
+    });
+  }
+  
   async callApi(url:string) : Promise<any> {
     return await new Promise(data =>{
       data(this.http.get(url).toPromise())

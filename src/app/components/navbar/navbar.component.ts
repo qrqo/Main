@@ -3,13 +3,6 @@ import { ROUTES } from '../sidebar/sidebar.component';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 
-//Service
-import { AuthService } from '../../service/auth.service';
-import { MainService } from '../../service/main.service';
-import { FireBaseCRUDService } from '../../service/fire-base-crud.service';
-
-import { Globals } from '../../models/globals';
-
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -22,24 +15,9 @@ export class NavbarComponent implements OnInit {
   constructor(
     location: Location,
     private element: ElementRef,
-    private router: Router,
-    private main: MainService,
-    private auth: AuthService,
-    private db: FireBaseCRUDService,
-    public globals: Globals
+    private router: Router
   ) {
     this.location = location;
-
-    if(this.globals.user.fid == null){
-      auth.checkAuth().authState.subscribe((d) => {
-        const cityRef = db.fs.collection('users').doc(d.uid);
-        cityRef.onSnapshot((querySnapshot) => {
-          const d = querySnapshot.data();      
-          this.globals.user = d;
-        });
-      });
-    }
-    
   }
 
   ngOnInit() {
