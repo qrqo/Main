@@ -20,16 +20,7 @@ export class UserMenuComponent implements OnInit {
     public globals: Globals
   ) {
     if (this.globals.user.fid == null) {
-      this.auth.checkAuth().authState.subscribe((d) => {
-        if (!d) {
-          this.main.goTo("/login");
-          return;
-        }
-        this.globals.userId = d.uid;
-        this.db.fs.collection('users').doc(d.uid).get().then(user => {
-          this.globals.user = user.data();
-        });
-      });
+      this.auth.checkAuth();
     }
   }
 

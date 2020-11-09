@@ -74,7 +74,8 @@
         </div>
         <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
           <div class="d-flex justify-content-between">
-            <h3 class="mb-0">ร้านของฉัน</h3>
+            <h3 class="mb-0">ร้านของฉัน</h3>            
+            <button class="btn btn-sm btn-warning" *ngIf="isEdit" (click)="edit()">แก้ไข</button>
             <button class="btn btn-sm btn-primary" *ngIf="!isEdit" (click)="edit()">ตั้งค่า</button>
             <button class="btn btn-sm btn-danger" *ngIf="isEdit" (click)="addRestaurant()">บันทึก/ยกเลิก</button>
           </div>
@@ -108,8 +109,9 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label class="form-control-label" for="inputRestaurantAddress">ที่อยู่</label>
-                    <input id="inputRestaurantAddress" class="form-control form-control-alternative" placeholder="ที่อยู่ร้าน"
-                      type="text" [(ngModel)]="restaurant.address" name="address" [disabled]="!isEdit">
+                    <input id="inputRestaurantAddress" class="form-control form-control-alternative"
+                      placeholder="ที่อยู่ร้าน" type="text" [(ngModel)]="restaurant.address" name="address"
+                      [disabled]="!isEdit">
                   </div>
                 </div>
               </div>
@@ -132,7 +134,8 @@
                   <div class="form-group">
                     <label class="form-control-label" for="inputRestaurantPostalCode">รหัสไปรษณีย์</label>
                     <input type="number" id="inputRestaurantPostalCode" class="form-control form-control-alternative"
-                      placeholder="รหัสไปรษณีย์" [(ngModel)]="restaurant.postalCode" name="postalCode" [disabled]="!isEdit">
+                      placeholder="รหัสไปรษณีย์" [(ngModel)]="restaurant.postalCode" name="postalCode"
+                      [disabled]="!isEdit">
                   </div>
                 </div>
               </div>
@@ -143,7 +146,8 @@
             <div class="pl-lg-4">
               <div class="form-group">
                 <label>ร้านของฉัน</label>
-                <textarea rows="4" class="form-control form-control-alternative" [(ngModel)]="restaurant.about" name="about" [disabled]="!isEdit"></textarea>
+                <textarea rows="4" class="form-control form-control-alternative" [(ngModel)]="restaurant.about"
+                  name="about" [disabled]="!isEdit"></textarea>
               </div>
             </div>
           </form>

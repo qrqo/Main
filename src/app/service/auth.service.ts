@@ -19,8 +19,20 @@ export class AuthService {
     public globals: Globals
   ) { }
 
-  checkAuth() {
-    return this.afAuth;
+  async checkAuth() {
+    return await this.afAuth.authState.subscribe((d) => {
+      if (!d) {
+        this.main.goTo("/login");
+        return;
+      }
+      this.globals.userId = d.uid;
+
+      const cityRef = this.db.fs.collection('users').doc(d.uid);
+
+      cityRef.get().then(user => {
+        this.globals.user = user.data()
+      });
+    });
   }
 
   logout() {
@@ -80,19 +92,7 @@ export class AuthService {
             };
 
             user.update(userFacebook);
-            this.checkAuth().authState.subscribe((d) => {
-              if (!d) {
-                this.main.goTo("/login");
-                return;
-              }
-              this.globals.userId = d.uid;
-
-              const cityRef = this.db.fs.collection('users').doc(d.uid);
-
-              cityRef.get().then(user => {
-                this.globals.user = user.data()
-              });
-            });
+            this.checkAuth();
           });
       })
       .then(() => {
