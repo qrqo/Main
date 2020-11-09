@@ -20,12 +20,12 @@ export class FireBaseCRUDService {
     return this.dbrt.object(obj); 
   }
 
-  public fs = firebase.firestore();
+  public fs = firebase.default.firestore();
 
   public st = this.dbst;
 
   now(){
-    return firebase.firestore.FieldValue.serverTimestamp();
+    return firebase.default.firestore.FieldValue.serverTimestamp();
   }
   
   

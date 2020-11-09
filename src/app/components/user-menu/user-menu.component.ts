@@ -25,10 +25,9 @@ export class UserMenuComponent implements OnInit {
           this.main.goTo("/login");
           return;
         }
-        const cityRef = this.db.fs.collection('users').doc(d.uid);
-
-        cityRef.get().then(user => {
-          this.globals.user = user.data()
+        this.globals.userId = d.uid;
+        this.db.fs.collection('users').doc(d.uid).get().then(user => {
+          this.globals.user = user.data();
         });
       });
     }

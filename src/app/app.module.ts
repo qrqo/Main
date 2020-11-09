@@ -1,5 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common'; 
+import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -10,6 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
+import { UserProfileComponent } from './pages/user-profile/user-profile.component';
+import { SettingProductComponent } from './pages/setting-product/setting-product.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -23,7 +25,7 @@ import { AngularFireDatabaseModule } from "@angular/fire/database";
 
 //Model
 import { UserFacebookModel } from './models/user-facebook-model';
-import { SettingProductComponent } from './pages/setting-product/setting-product.component';
+import { RestaurantModel } from './models/main-model';
 
 import { Globals } from './models/globals';
 
@@ -32,11 +34,12 @@ import { Globals } from './models/globals';
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
-    SettingProductComponent
+    SettingProductComponent,
+    UserProfileComponent
   ],
   imports: [
-    BrowserModule,
     CommonModule,
+    BrowserModule,
     FormsModule,
     ComponentsModule,
     NgbModule,
@@ -52,7 +55,8 @@ import { Globals } from './models/globals';
   ],
   providers: [
     UserFacebookModel,
-    Globals
+    Globals,
+    RestaurantModel
   ],
   bootstrap: [AppComponent]
 })

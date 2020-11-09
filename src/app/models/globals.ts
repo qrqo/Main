@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class Globals {
   user = new User();
+  userId?:string;
+  restaurantId?:string;
 }
 
 export class User {

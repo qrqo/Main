@@ -17,7 +17,7 @@ export class AuthService {
     private afAuth: AngularFireAuth,
     private main: MainService,
     public globals: Globals
-  ) {}
+  ) { }
 
   checkAuth() {
     return this.afAuth;
@@ -25,24 +25,26 @@ export class AuthService {
 
   logout() {
     firebase
+      .default
       .auth()
       .signOut()
       .then(() => {
         this.main.goTo("/login");
       })
-      .catch((error) => {        
+      .catch((error) => {
         this.main.swalError(error.message);
       });
   }
 
   async facebookAuth() {
-    var provider = new firebase.auth.FacebookAuthProvider();
+    var provider = new firebase.default.auth.FacebookAuthProvider();
 
     //provider.setCustomParameters("picture.width(1000)");
     // provider.addScope('first_name');
 
-    firebase.auth().languageCode = 'th_TH';
+    firebase.default.auth().languageCode = 'th_TH';
     await firebase
+      .default
       .auth()
       .signInWithPopup(provider)
       .then(async (result) => {
@@ -64,7 +66,7 @@ export class AuthService {
         this.main
           .callApi(
             'https://graph.facebook.com/v8.0/me?fields=picture.width(1000)&access_token=' +
-              credential.accessToken
+            credential.accessToken
           )
           .then((data) => {
             let userFacebook = {
@@ -74,7 +76,7 @@ export class AuthService {
               firstName: profile.first_name,
               lastName: profile.last_name,
               picture: data.picture.data.url,
-              lastLogin: firebase.firestore.FieldValue.serverTimestamp(),
+              lastLogin: firebase.default.firestore.FieldValue.serverTimestamp(),
             };
 
             user.update(userFacebook);
@@ -83,16 +85,18 @@ export class AuthService {
                 this.main.goTo("/login");
                 return;
               }
+              this.globals.userId = d.uid;
+
               const cityRef = this.db.fs.collection('users').doc(d.uid);
 
-              cityRef.get().then(user =>{
+              cityRef.get().then(user => {
                 this.globals.user = user.data()
               });
             });
           });
       })
       .then(() => {
-        
+
         this.main.goTo('');
       })
       .catch((error) => {
